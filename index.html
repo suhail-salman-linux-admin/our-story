@@ -1,29 +1,76 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Will You Go On A Date With Me?</title>
+  <title>Special Invitation ❤️</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="card">
-    <h1 id="question">Will you go out with me? ☕</h1>
-    <div class="btn-group">
-      <button id="yesBtn">Yes! ❤️</button>
-      <button id="noBtn">No</button>
+  <div class="container">
+    <!-- Step 1: Proposal -->
+    <div id="step1" class="step-card active">
+      <h1>Will you go on a date with me? 🌹</h1>
+      <p class="subtitle">Think carefully, you can't say no anyway!</p>
+      <div class="btn-group">
+        <button id="yesBtn">Yes! 🥰</button>
+        <button id="noBtn">No</button>
+      </div>
     </div>
-    <div id="datePlanner" class="hidden">
-      <h2>Pick a date activity:</h2>
-      <select id="activity">
-        <option>Cozy Cafe & Coffee</option>
-        <option>Long Drive & Music</option>
-        <option>Late Night Dinner</option>
-      </select>
-      <button id="confirmBtn">Confirm Date</button>
-      <p id="finalMsg" class="hidden">It's a plan! Check your WhatsApp/DMs. ✨</p>
+
+    <!-- Step 2: Pick Date & Time -->
+    <div id="step2" class="step-card">
+      <h2>When are you free? 🗓️</h2>
+      <p class="subtitle">Choose a perfect day & time for us</p>
+      <div class="input-group">
+        <label>Select Date:</label>
+        <input type="date" id="dateInput" required>
+      </div>
+      <div class="input-group">
+        <label>Select Time:</label>
+        <input type="time" id="timeInput" required>
+      </div>
+      <button class="next-btn" id="toStep3">Next: What are we eating? 🍕</button>
+    </div>
+
+    <!-- Step 3: Pick Menu / Food -->
+    <div id="step3" class="step-card">
+      <h2>What's on the menu? 🍽️</h2>
+      <p class="subtitle">Pick what you'd love to eat</p>
+      <div class="menu-options">
+        <label class="menu-item">
+          <input type="checkbox" name="food" value="Coffee & Dessert ☕🍰">
+          <span>Coffee & Dessert ☕🍰</span>
+        </label>
+        <label class="menu-item">
+          <input type="checkbox" name="food" value="Pizza & Pasta 🍕🍝">
+          <span>Pizza & Pasta 🍕🍝</span>
+        </label>
+        <label class="menu-item">
+          <input type="checkbox" name="food" value="Fine Dining / Dinner 🍷✨">
+          <span>Fine Dining Dinner 🍷✨</span>
+        </label>
+        <label class="menu-item">
+          <input type="checkbox" name="food" value="Street Food Tour 🌮🍦">
+          <span>Street Food & Ice Cream 🌮🍦</span>
+        </label>
+      </div>
+      <button class="next-btn" id="toFinish">Lock It In! 🔒</button>
+    </div>
+
+    <!-- Step 4: Final Confirmation Screen -->
+    <div id="step4" class="step-card">
+      <h2>It's a Date! 🎉❤️</h2>
+      <div class="summary-box">
+        <p><strong>Date:</strong> <span id="summaryDate">-</span></p>
+        <p><strong>Time:</strong> <span id="summaryTime">-</span></p>
+        <p><strong>Menu:</strong> <span id="summaryMenu">-</span></p>
+      </div>
+      <p class="note">Can't wait to see you! Dress cozy & bring your best smile. ✨</p>
+      <button class="whatsapp-btn" id="sendWhatsApp">Send Plan on WhatsApp 💬</button>
     </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
