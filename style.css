@@ -1,0 +1,50 @@
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #fbf8f5;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.card {
+  text-align: center;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  max-width: 400px;
+  width: 90%;
+}
+
+.btn-group {
+  margin-top: 1.5rem;
+  position: relative;
+  min-height: 50px;
+}
+
+button {
+  padding: 10px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+#yesBtn {
+  background-color: #e63946;
+  color: white;
+  margin-right: 10px;
+}
+
+#noBtn {
+  background-color: #d1d5db;
+  color: #374151;
+  position: absolute;
+}
+
+.hidden {
+  display: none;
+}
