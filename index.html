@@ -1,388 +1,69 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>A Question from My Heart ❤️</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <title>For Warisha ❤️</title>
-
-    <link rel="stylesheet" href="style.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-<!-- LOADING SCREEN -->
-<div id="loader">
-    <div class="loader-heart">♥</div>
-    <p>Something special is waiting for you...</p>
-</div>
+  <!-- Floating hearts container -->
+  <div id="heartCanvas"></div>
 
-
-<!-- BACKGROUND -->
-<div class="stars"></div>
-<div class="shooting-stars"></div>
-<div class="floating-hearts"></div>
-
-
-<!-- MUSIC BUTTON -->
-<button class="music-btn" id="musicBtn" onclick="toggleMusic()">
-    ♫ <span>Our Song</span>
-</button>
-
-<audio id="music" loop>
-    <!-- Optional:
-    <source src="song.mp3" type="audio/mpeg">
-    -->
-</audio>
-
-
-<!-- HERO -->
-<section class="hero">
-
-    <div class="moon"></div>
-
-    <div class="hero-content">
-
-        <p class="eyebrow">A LITTLE STORY WRITTEN FOR YOU</p>
-
-        <div class="ornament">✦</div>
-
-        <h1>Noureen</h1>
-
-        <p class="nickname">
-            but in my heart...
-        </p>
-
-        <h2>You're my <span>Warisha</span> ❤️</h2>
-
-        <p class="hero-description">
-            In a universe filled with billions of people,
-            somehow my heart found you.
-        </p>
-
-        <button class="begin-btn" onclick="beginStory()">
-            BEGIN OUR STORY
-            <span>→</span>
-        </button>
-
+  <div class="proposal-card" id="cardBox">
+    <!-- Music badge -->
+    <div class="music-badge" id="musicToggle">
+      <span>🎵</span> <span id="musicText">Play Tone</span>
     </div>
 
-    <div class="scroll">
-        <span></span>
-        SCROLL TO DISCOVER
+    <!-- Question View -->
+    <div id="questionState">
+      <div class="polaroid">
+        <div class="polaroid-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&auto=format&fit=crop&q=80" alt="Special Memory" id="memoryPic">
+        </div>
+        <div class="polaroid-caption">You & Me ❤️</div>
+      </div>
+
+      <h1>Hey Beautiful, <span class="heart-pulse">💖</span></h1>
+      <p class="proposal-text">
+        Every single day with you is my favourite. Life is just so much sweeter with you by my side. Will you be mine forever?
+      </p>
+
+      <div class="action-container" id="actionArea">
+        <button class="btn" id="yesBtn">YES! 💍</button>
+        <button class="btn" id="noBtn">No</button>
+      </div>
     </div>
 
-</section>
-
-
-<!-- UNIVERSE -->
-<section class="universe section">
-
-    <div class="section-content reveal">
-
-        <p class="eyebrow">OUR LITTLE UNIVERSE</p>
-
-        <h2>
-            Out of all the stars,<br>
-            <span>I found you.</span>
-        </h2>
-
-        <div class="star-symbol">✦</div>
-
-        <p class="large-text">
-            Maybe it was coincidence.
-            Maybe it was destiny.
-            I don't know.
-        </p>
-
-        <p class="large-text">
-            But I'm grateful that somehow,
-            somewhere,
-            our paths crossed.
-        </p>
-
+    <!-- Success View -->
+    <div id="successState" class="success-view hidden">
+      <div class="success-icon heart-pulse">💍✨</div>
+      <h2>YAY! She Said YES! ❤️</h2>
+      <p>
+        You just made me the happiest person in the world! I promise to make you smile, protect your peace, and cherish every second with you.
+      </p>
+      
+      <a href="https://api.whatsapp.com/send?phone=919999999999&text=I%20Said%20YES!%20%E2%9D%A4%EF%B8%8F%F0%9F%A5%B0" 
+         target="_blank" 
+         class="whatsapp-btn">
+        <span>Send me a "YES!" on WhatsApp 💌</span>
+      </a>
     </div>
+  </div>
 
-</section>
-
-
-<!-- LITTLE THINGS -->
-<section class="things section">
-
-    <div class="section-content">
-
-        <p class="eyebrow">THE LITTLE THINGS</p>
-
-        <h2 class="reveal">
-            Things I love about you
-        </h2>
-
-        <div class="cards">
-
-            <div class="glass-card reveal">
-                <div class="card-icon">♡</div>
-                <h3>Your Smile</h3>
-                <p>
-                    Somehow it has the power to make
-                    an ordinary day feel special.
-                </p>
-            </div>
-
-            <div class="glass-card reveal">
-                <div class="card-icon">✦</div>
-                <h3>Your Presence</h3>
-                <p>
-                    Even the simplest moments feel
-                    different when you're around.
-                </p>
-            </div>
-
-            <div class="glass-card reveal">
-                <div class="card-icon">♥</div>
-                <h3>Your Heart</h3>
-                <p>
-                    The person you are is the reason
-                    I want to keep you in my life.
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- LETTER -->
-<section class="letter section">
-
-    <div class="letter-container reveal">
-
-        <div class="letter-top">
-            <span>✦</span>
-            A LETTER FOR YOU
-            <span>✦</span>
-        </div>
-
-        <h2>Dear Warisha,</h2>
-
-        <p>
-            I don't know exactly when it happened,
-            but somewhere along the way,
-            you became a very special part of my life.
-        </p>
-
-        <p>
-            You became someone whose smile I look forward to,
-            whose messages can change my mood,
-            and whose presence makes everything
-            feel a little more beautiful.
-        </p>
-
-        <p>
-            I could write a thousand words about you,
-            but sometimes the heart feels things
-            that words simply cannot explain.
-        </p>
-
-        <div class="signature">
-            Always yours,
-            <strong>❤️</strong>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- TIMELINE -->
-<section class="timeline section">
-
-    <div class="section-content">
-
-        <p class="eyebrow">OUR STORY</p>
-
-        <h2 class="reveal">
-            Maybe this is just the beginning...
-        </h2>
-
-        <div class="timeline-line">
-
-            <div class="timeline-item reveal">
-                <div class="dot">01</div>
-                <div>
-                    <h3>We Met</h3>
-                    <p>
-                        Two people. One unexpected connection.
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item reveal">
-                <div class="dot">02</div>
-                <div>
-                    <h3>We Connected</h3>
-                    <p>
-                        Conversations slowly became memories.
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item reveal">
-                <div class="dot">03</div>
-                <div>
-                    <h3>You Became Special</h3>
-                    <p>
-                        Somewhere along the way,
-                        you became my favourite person.
-                    </p>
-                </div>
-            </div>
-
-            <div class="timeline-item reveal">
-                <div class="dot">04</div>
-                <div>
-                    <h3>Today</h3>
-                    <p>
-                        I'm here with one question
-                        I really want to ask you.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- FOREVER -->
-<section class="forever section">
-
-    <div class="forever-content reveal">
-
-        <div class="infinity">∞</div>
-
-        <p class="eyebrow">FOREVER</p>
-
-        <h2>
-            Maybe forever sounds<br>
-            like a long time...
-        </h2>
-
-        <p>
-            But with you,
-            it doesn't sound long enough.
-        </p>
-
-        <div class="equation">
-            YOU <span>+</span> ME <span>=</span> FOREVER
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- PROPOSAL -->
-<section class="proposal" id="proposal">
-
-    <div class="proposal-glow"></div>
-
-    <div class="proposal-content">
-
-        <p class="eyebrow">ONE LAST QUESTION</p>
-
-        <div class="ring">💍</div>
-
-        <h2>Warisha...</h2>
-
-        <p class="proposal-text">
-            I don't want a perfect life.
-            <br>
-            I just want a life where you're a part of it.
-        </p>
-
-        <h1>
-            Will You Be Mine?
-        </h1>
-
-        <div class="proposal-buttons">
-
-            <button class="yes-btn" onclick="sayYes()">
-                YES, ALWAYS ❤️
-            </button>
-
-            <button class="no-btn" id="noBtn">
-                NO 😜
-            </button>
-
-        </div>
-
-        <p class="hint">
-            Choose wisely... 👀
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- SUCCESS -->
-<section class="success" id="success">
-
-    <div class="confetti-container"></div>
-
-    <div class="success-content">
-
-        <div class="success-heart">
-            ❤️
-        </div>
-
-        <p class="eyebrow">
-            AND SO IT BEGINS...
-        </p>
-
-        <h1>
-            Our Story Begins
-        </h1>
-
-        <div class="names">
-            Noureen <span>♥</span> Warisha
-        </div>
-
-        <p>
-            Here's to every laugh,
-            every conversation,
-            every little moment,
-            and every tomorrow.
-        </p>
-
-        <div class="forever-text">
-            <span>∞</span>
-            Together
-            <span>∞</span>
-        </div>
-
-    </div>
-
-</section>
-
-
-<footer>
-    Made with ❤️ for Warisha
-</footer>
-
-
-<script src="script.js"></script>
-
+  <!-- External JavaScript -->
+  <script src="script.js"></script>
 </body>
 </html>
-```
