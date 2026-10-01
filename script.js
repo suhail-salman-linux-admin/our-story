@@ -1,65 +1,370 @@
-// Step Navigation
-const step1 = document.getElementById("step1");
-const step2 = document.getElementById("step2");
-const step3 = document.getElementById("step3");
-const step4 = document.getElementById("step4");
+```javascript
+/* =========================
+   PAGE LOADER
+========================= */
 
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
-const toStep3 = document.getElementById("toStep3");
-const toFinish = document.getElementById("toFinish");
+window.addEventListener("load", () => {
 
-// 1. Dodging "No" button
-function dodgeNoButton() {
-  const x = Math.floor(Math.random() * 180) - 90;
-  const y = Math.floor(Math.random() * 100) - 50;
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    setTimeout(() => {
+
+        document.getElementById("loader")
+            .classList.add("hide");
+
+    }, 1800);
+
+});
+
+
+/* =========================
+   BEGIN STORY
+========================= */
+
+function beginStory() {
+
+    document.querySelector(".universe")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
 }
 
-noBtn.addEventListener("mouseover", dodgeNoButton);
-noBtn.addEventListener("touchstart", dodgeNoButton);
 
-// 2. Proposal Accepted -> Move to Step 2
-yesBtn.addEventListener("click", () => {
-  step1.classList.remove("active");
-  step2.classList.add("active");
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+const revealElements =
+    document.querySelectorAll(".reveal");
+
+const observer =
+    new IntersectionObserver(
+        (entries) => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("visible");
+
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.15
+        }
+    );
+
+
+revealElements.forEach(element => {
+
+    observer.observe(element);
+
 });
 
-// 3. Date & Time Selection -> Move to Step 3
-toStep3.addEventListener("click", () => {
-  const dateVal = document.getElementById("dateInput").value;
-  const timeVal = document.getElementById("timeInput").value;
 
-  if (!dateVal || !timeVal) {
-    alert("Please select both a date and a time! ❤️");
-    return;
-  }
+/* =========================
+   FLOATING HEARTS
+========================= */
 
-  step2.classList.remove("active");
-  step3.classList.add("active");
-});
+const heartSymbols = [
+    "♥",
+    "♡",
+    "❤",
+    "💕",
+    "✨"
+];
 
-// 4. Menu Selection -> Move to Step 4 (Summary)
-toFinish.addEventListener("click", () => {
-  const selectedFoods = Array.from(
-    document.querySelectorAll('input[name="food"]:checked')
-  ).map((el) => el.value);
 
-  const dateVal = document.getElementById("dateInput").value;
-  const timeVal = document.getElementById("timeInput").value;
-  const menuVal = selectedFoods.length > 0 ? selectedFoods.join(", ") : "Whatever you order! 😋";
+function createHeart() {
 
-  document.getElementById("summaryDate").innerText = dateVal;
-  document.getElementById("summaryTime").innerText = timeVal;
-  document.getElementById("summaryMenu").innerText = menuVal;
+    const heart =
+        document.createElement("div");
 
-  step3.classList.remove("active");
-  step4.classList.add("active");
+    heart.className =
+        "floating-heart";
 
-  // WhatsApp Share Button Setup
-  const sendWhatsApp = document.getElementById("sendWhatsApp");
-  sendWhatsApp.addEventListener("click", () => {
-    const text = `Hey! I said YES to our date ❤️%0A📅 Date: ${dateVal}%0A⏰ Time: ${timeVal}%0A🍽️ Food: ${menuVal}`;
-    window.open(`https://api.whatsapp.com/send?text=${text}`, "_blank");
-  });
-});
+    heart.innerHTML =
+        heartSymbols[
+            Math.floor(
+                Math.random() *
+                heartSymbols.length
+            )
+        ];
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.fontSize =
+        10 + Math.random() * 22 + "px";
+
+    heart.style.color =
+        Math.random() > .5
+            ? "#e8a1b4"
+            : "#ffffff";
+
+    heart.style.animationDuration =
+        5 + Math.random() * 6 + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+
+        heart.remove();
+
+    }, 11000);
+
+}
+
+
+setInterval(createHeart, 900);
+
+
+/* =========================
+   NO BUTTON
+========================= */
+
+const noButton =
+    document.getElementById("noBtn");
+
+
+function moveNoButton() {
+
+    const padding = 20;
+
+    const maxX =
+        window.innerWidth -
+        noButton.offsetWidth -
+        padding;
+
+    const maxY =
+        window.innerHeight -
+        noButton.offsetHeight -
+        padding;
+
+    const x =
+        padding +
+        Math.random() * Math.max(maxX - padding, 1);
+
+    const y =
+        padding +
+        Math.random() * Math.max(maxY - padding, 1);
+
+    noButton.style.position =
+        "fixed";
+
+    noButton.style.left =
+        x + "px";
+
+    noButton.style.top =
+        y + "px";
+
+    noButton.style.zIndex = "5000";
+}
+
+
+/* Desktop */
+
+noButton.addEventListener(
+    "mouseenter",
+    moveNoButton
+);
+
+
+/* Mobile */
+
+noButton.addEventListener(
+    "touchstart",
+    function(event) {
+
+        event.preventDefault();
+
+        moveNoButton();
+
+    }
+);
+
+
+/* =========================
+   YES BUTTON
+========================= */
+
+function sayYes() {
+
+    const proposal =
+        document.querySelector(".proposal");
+
+    const success =
+        document.getElementById("success");
+
+    proposal.style.display =
+        "none";
+
+    success.classList.add("show");
+
+    createConfetti();
+
+    createCelebrationHearts();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* =========================
+   CELEBRATION HEARTS
+========================= */
+
+function createCelebrationHearts() {
+
+    for (let i = 0; i < 100; i++) {
+
+        setTimeout(() => {
+
+            const heart =
+                document.createElement("div");
+
+            heart.className =
+                "floating-heart";
+
+            heart.innerHTML =
+                ["❤️", "💖", "💕", "💗", "💘", "✨"]
+                [
+                    Math.floor(
+                        Math.random() * 6
+                    )
+                ];
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.fontSize =
+                15 + Math.random() * 35 + "px";
+
+            heart.style.animationDuration =
+                3 + Math.random() * 5 + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+
+                heart.remove();
+
+            }, 8000);
+
+        }, i * 40);
+
+    }
+
+}
+
+
+/* =========================
+   CONFETTI
+========================= */
+
+function createConfetti() {
+
+    const container =
+        document.querySelector(
+            ".confetti-container"
+        );
+
+    const symbols = [
+        "♥",
+        "✦",
+        "✧",
+        "•"
+    ];
+
+    for (let i = 0; i < 120; i++) {
+
+        const piece =
+            document.createElement("div");
+
+        piece.className =
+            "confetti";
+
+        piece.innerHTML =
+            symbols[
+                Math.floor(
+                    Math.random() *
+                    symbols.length
+                )
+            ];
+
+        piece.style.left =
+            Math.random() * 100 + "%";
+
+        piece.style.fontSize =
+            10 + Math.random() * 20 + "px";
+
+        piece.style.color =
+            Math.random() > .5
+                ? "#eaa5b8"
+                : "#ffffff";
+
+        piece.style.animationDuration =
+            2 + Math.random() * 4 + "s";
+
+        piece.style.animationDelay =
+            Math.random() * 2 + "s";
+
+        container.appendChild(piece);
+
+    }
+
+}
+
+
+/* =========================
+   MUSIC
+========================= */
+
+const music =
+    document.getElementById("music");
+
+const musicBtn =
+    document.getElementById("musicBtn");
+
+let musicPlaying = false;
+
+
+function toggleMusic() {
+
+    if (!music.src) {
+
+        alert(
+            "Add your song as song.mp3 in the GitHub repository first ❤️"
+        );
+
+        return;
+
+    }
+
+    if (musicPlaying) {
+
+        music.pause();
+
+        musicBtn.innerHTML =
+            "♫ <span>Our Song</span>";
+
+        musicPlaying = false;
+
+    } else {
+
+        music.play();
+
+        musicBtn.innerHTML =
+            "❚❚ <span>Playing...</span>";
+
+        musicPlaying = true;
+
+    }
+
+}
+```
