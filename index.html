@@ -3,334 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Surprise For You ❤️</title>
+    <title>A Special Surprise For Noureen ❤️</title>
     <!-- Romantic Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Nunito', sans-serif;
-            background: linear-gradient(135deg, #ffeef2 0%, #ffc0cb 50%, #fed5dc 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow-x: hidden;
-            position: relative;
-            padding: 20px;
-        }
-
-        /* Floating background items */
-        .bg-element {
-            position: fixed;
-            user-select: none;
-            pointer-events: none;
-            z-index: 1;
-            animation: floatSlow 8s linear infinite;
-        }
-
-        @keyframes floatSlow {
-            0% { transform: translateY(105vh) rotate(0deg); opacity: 0.8; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* Card container */
-        .stage-container {
-            width: 100%;
-            max-width: 480px;
-            z-index: 10;
-            position: relative;
-            display: flex;
-            justify-content: center;
-        }
-
-        .screen {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 28px;
-            padding: 35px 25px;
-            box-shadow: 0 20px 45px rgba(220, 50, 90, 0.18);
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            text-align: center;
-            width: 100%;
-            transition: all 0.5s ease-in-out;
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px) scale(0.96); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* SCREEN 1: Wax Sealed Envelope */
-        .envelope-wrap {
-            cursor: pointer;
-            padding: 20px 0;
-            perspective: 1000px;
-        }
-
-        .envelope-box {
-            background: linear-gradient(135deg, #f5d6cb 0%, #e2b29f 100%);
-            border-radius: 16px;
-            padding: 40px 20px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-            position: relative;
-            border: 2px dashed #b8860b;
-            transition: transform 0.3s ease;
-        }
-
-        .envelope-box:hover {
-            transform: scale(1.03);
-        }
-
-        .wax-seal {
-            width: 72px;
-            height: 72px;
-            background: radial-gradient(circle, #e63946, #9b111e);
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            box-shadow: 0 8px 18px rgba(155, 17, 30, 0.4);
-            animation: sealGlow 2s infinite alternate;
-        }
-
-        @keyframes sealGlow {
-            from { box-shadow: 0 0 10px rgba(230, 57, 70, 0.4); }
-            to { box-shadow: 0 0 25px rgba(230, 57, 70, 0.8); }
-        }
-
-        .env-title {
-            font-family: 'Cinzel', serif;
-            color: #5c3d2e;
-            font-size: 1.4rem;
-            margin-bottom: 6px;
-        }
-
-        .env-subtitle {
-            color: #8c584a;
-            font-size: 0.95rem;
-            font-style: italic;
-        }
-
-        /* SCREEN 2: Polaroids / Chapters */
-        .polaroid-gallery {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin: 20px 0;
-            align-items: center;
-        }
-
-        .polaroid {
-            background: #fff;
-            padding: 12px 12px 18px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            border-radius: 6px;
-            width: 85%;
-            transition: transform 0.3s;
-        }
-
-        .polaroid:nth-child(1) { transform: rotate(-3deg); }
-        .polaroid:nth-child(2) { transform: rotate(3deg); }
-        .polaroid:nth-child(3) { transform: rotate(-2deg); }
-
-        .polaroid:hover {
-            transform: scale(1.05) rotate(0deg);
-            z-index: 5;
-        }
-
-        .polaroid-img {
-            width: 100%;
-            height: 150px;
-            background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 45px;
-            overflow: hidden;
-        }
-
-        .polaroid-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .polaroid-caption {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.25rem;
-            color: #444;
-            margin-top: 10px;
-        }
-
-        /* Common Buttons */
-        .btn-main {
-            background: linear-gradient(45deg, #ff4081, #d81b60);
-            color: #fff;
-            border: none;
-            padding: 14px 34px;
-            font-size: 1.05rem;
-            font-weight: 700;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(216, 27, 96, 0.35);
-            transition: all 0.3s ease;
-            margin-top: 15px;
-        }
-
-        .btn-main:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 26px rgba(216, 27, 96, 0.5);
-        }
-
-        /* SCREEN 3: The Big Ask */
-        .ring-box {
-            font-size: 70px;
-            margin: 10px 0;
-            display: inline-block;
-            animation: ringFloat 2.5s ease-in-out infinite;
-        }
-
-        @keyframes ringFloat {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.08); filter: drop-shadow(0 10px 15px rgba(255, 182, 193, 0.8)); }
-        }
-
-        .propose-name {
-            font-size: 1.15rem;
-            color: #666;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .propose-heading {
-            font-family: 'Cinzel', serif;
-            font-size: 2.1rem;
-            color: #c2185b;
-            margin: 6px 0 14px;
-            font-weight: 700;
-        }
-
-        .propose-quote {
-            color: #444;
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 25px;
-            font-style: italic;
-        }
-
-        .btn-zone {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            min-height: 70px;
-            position: relative;
-        }
-
-        .btn-yes {
-            background: linear-gradient(45deg, #e91e63, #c2185b);
-            color: white;
-            padding: 14px 36px;
-            border-radius: 50px;
-            border: none;
-            font-size: 1.15rem;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(194, 24, 91, 0.4);
-            transition: transform 0.2s;
-        }
-
-        .btn-yes:hover {
-            transform: scale(1.1);
-        }
-
-        .btn-no {
-            background: white;
-            color: #666;
-            border: 1px solid #ccc;
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-size: 1rem;
-            cursor: pointer;
-            font-weight: 600;
-            position: relative;
-            transition: 0.15s ease-out;
-            white-space: nowrap;
-        }
-
-        /* SCREEN 4: Grand Finale Certificate */
-        .cert-card {
-            border: 4px double #d4af37;
-            border-radius: 18px;
-            padding: 25px 15px;
-            background: #fffcf7;
-            position: relative;
-            margin: 15px 0 20px;
-        }
-
-        .cert-badge {
-            width: 55px;
-            height: 55px;
-            background: #d4af37;
-            border-radius: 50%;
-            margin: 0 auto 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 26px;
-        }
-
-        .cert-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.6rem;
-            color: #b8860b;
-            margin-bottom: 5px;
-        }
-
-        .cert-text {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.4rem;
-            color: #333;
-            line-height: 1.5;
-            margin: 10px 0;
-        }
-
-        .btn-wa {
-            background: #25d366;
-            color: white;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            padding: 14px 28px;
-            border-radius: 50px;
-            font-weight: bold;
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
-            transition: transform 0.2s;
-        }
-
-        .btn-wa:hover {
-            transform: scale(1.05);
-        }
-    </style>
+    <!-- Link External CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -340,10 +19,10 @@
         
         <!-- SCREEN 1: Wax Sealed Envelope -->
         <div class="screen" id="screen-1">
-            <h2 style="font-family: 'Cinzel', serif; color: #880e4f; margin-bottom: 8px;">Khas Aapke Liye</h2>
-            <p style="color: #666; font-size: 0.95rem; margin-bottom: 25px;">Ek chota sa paigaam, dil ki gehraiyon se...</p>
+            <h2 class="head-title">Khas Noureen Ke Liye ❤️</h2>
+            <p class="sub-text">Ek chota sa paigaam, dil ki gehraiyon se...</p>
             
-            <div class="envelope-wrap" onclick="openEnvelope()">
+            <div class="envelope-wrap" id="envelope-trigger">
                 <div class="envelope-box">
                     <div class="wax-seal">💌</div>
                     <div class="env-title">Confidential</div>
@@ -354,45 +33,33 @@
 
         <!-- SCREEN 2: Polaroids / Chapters -->
         <div class="screen hidden" id="screen-2">
-            <h2 style="font-family: 'Cinzel', serif; color: #880e4f;">Humare Haseen Pal ❤️</h2>
-            <p style="color: #666; font-size: 0.9rem;">Har lamha jo tumhare sath bitaya...</p>
+            <h2 class="head-title">Humare Haseen Pal ❤️</h2>
+            <p class="sub-text">Har lamha jo tumhare sath bitaya...</p>
 
             <div class="polaroid-gallery">
-                <!-- Polaroid 1 -->
                 <div class="polaroid">
-                    <div class="polaroid-img">
-                        <!-- Replace with real image: <img src="photo1.jpg" alt="Memory"> -->
-                        ✨👩‍❤️‍👨
-                    </div>
+                    <div class="polaroid-img">✨👩‍❤️‍👨</div>
                     <div class="polaroid-caption">Wo pehli mulakaat...</div>
                 </div>
 
-                <!-- Polaroid 2 -->
                 <div class="polaroid">
-                    <div class="polaroid-img">
-                        <!-- Replace with real image: <img src="photo2.jpg" alt="Memory"> -->
-                        ☕🌙
-                    </div>
+                    <div class="polaroid-img">☕🌙</div>
                     <div class="polaroid-caption">Der raat ki pyari baatein...</div>
                 </div>
 
-                <!-- Polaroid 3 -->
                 <div class="polaroid">
-                    <div class="polaroid-img">
-                        <!-- Replace with real image: <img src="photo3.jpg" alt="Memory"> -->
-                        🌸🤝
-                    </div>
+                    <div class="polaroid-img">🌸🤝</div>
                     <div class="polaroid-caption">Har dukh-sukh mein saath...</div>
                 </div>
             </div>
 
-            <button class="btn-main" onclick="goToScreen(3)">Aage Chaliye ✨</button>
+            <button class="btn-main" id="btn-to-screen-3">Aage Chaliye ✨</button>
         </div>
 
         <!-- SCREEN 3: The Big Ask -->
         <div class="screen hidden" id="screen-3">
             <div class="ring-box">💍</div>
-            <div class="Nouree">My Dear One</div>
+            <div class="propose-name">My Dear Noureen ❤️</div>
             <h1 class="propose-heading">Will You Marry Me?</h1>
             <p class="propose-quote">
                 "Zindagi ki har subah tere deedar se shuru ho,<br>
@@ -401,28 +68,27 @@
             </p>
 
             <div class="btn-zone">
-                <button class="btn-yes" onclick="handleYes()">Yes! ❤️</button>
-                <button class="btn-no" id="no-btn" onmouseover="dodgeNo()" onclick="dodgeNo()">No</button>
+                <button class="btn-yes" id="yes-btn">Yes! ❤️</button>
+                <button class="btn-no" id="no-btn">No</button>
             </div>
         </div>
 
         <!-- SCREEN 4: Final Celebration -->
         <div class="screen hidden" id="screen-4">
-            <h1 style="font-family: 'Cinzel', serif; color: #c2185b; font-size: 2rem;">She Said YES! 💍💖</h1>
-            <p style="color: #555; margin: 5px 0 15px; font-style: italic;">Hamesha ke liye ek duje ke...</p>
+            <h1 class="celebrate-title">She Said YES! 💍💖</h1>
+            <p class="celebrate-subtitle">Hamesha ke liye ek duje ke...</p>
 
             <div class="cert-card">
                 <div class="cert-badge">✓</div>
                 <div class="cert-title">Love Contract</div>
                 <div class="cert-text">
                     "This confirms that from this day forward,<br>
-                    we are bound by laughter, unconditional love, <br>
+                    <strong>Suhail & Noureen</strong> are bound by laughter, unconditional love, <br>
                     and forever togetherness!"
                 </div>
-                <p style="font-size: 0.85rem; color: #888; margin-top: 10px;">Official & Sealed Forever ♾️</p>
+                <p class="cert-footer">Official & Sealed Forever ♾️</p>
             </div>
 
-            <!-- WhatsApp Message: Enter your phone number with country code like 919876543210 -->
             <a href="https://wa.me/?text=YES!%20A%20million%20times%20YES!%20I%20love%20you%20forever!%20💍❤️" target="_blank" class="btn-wa">
                 <span>WhatsApp the Good News! 📲</span>
             </a>
@@ -430,115 +96,9 @@
 
     </div>
 
-    <!-- Confetti Library -->
+    <!-- External Confetti Library -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-    <script>
-        // Floating Background Hearts & Flowers
-        function spawnFloating() {
-            const symbols = ['❤️', '💖', '🌸', '✨', '💕', '🌷'];
-            const el = document.createElement('div');
-            el.className = 'bg-element';
-            el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-            el.style.left = Math.random() * 100 + 'vw';
-            el.style.fontSize = (Math.random() * 14 + 16) + 'px';
-            el.style.animationDuration = (Math.random() * 4 + 6) + 's';
-            document.getElementById('bg-container').appendChild(el);
-            setTimeout(() => el.remove(), 10000);
-        }
-        setInterval(spawnFloating, 400);
-
-        // Gentle Ambient Melody using Web Audio API
-        function playChime() {
-            try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const notes = [261.63, 329.63, 392.00, 523.25]; // C, E, G, High C
-                notes.forEach((freq, idx) => {
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.15);
-                    gain.gain.setValueAtTime(0.15, ctx.currentTime + idx * 0.15);
-                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.15 + 1.2);
-                    osc.connect(gain);
-                    gain.connect(ctx.destination);
-                    osc.start(ctx.currentTime + idx * 0.15);
-                    osc.stop(ctx.currentTime + idx * 0.15 + 1.3);
-                });
-            } catch(e) {}
-        }
-
-        // Navigation between Screens
-        function goToScreen(num) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
-            const target = document.getElementById('screen-' + num);
-            if (target) {
-                target.classList.remove('hidden');
-            }
-        }
-
-        function openEnvelope() {
-            playChime();
-            goToScreen(2);
-        }
-
-        // Runaway 'No' Button with Teasing Messages
-        const noBtn = document.getElementById('no-btn');
-        const funnyTexts = [
-            "Are you sure? 🥺",
-            "Ek baar socho! 🙈",
-            "Ye button broken hai 😉",
-            "Nahi allowed nahi hai!",
-            "Sirf YES allowed hai ❤️"
-        ];
-        let textIndex = 0;
-
-        function dodgeNo() {
-            const padding = 60;
-            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
-            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
-
-            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
-            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
-
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
-
-            noBtn.innerText = funnyTexts[textIndex % funnyTexts.length];
-            textIndex++;
-        }
-
-        // Final YES Action + Grand Confetti
-        function handleYes() {
-            goToScreen(4);
-            playChime();
-
-            // 5 Seconds Grand Confetti Celebration
-            const end = Date.now() + 5 * 1000;
-            const colors = ['#e91e63', '#ff4081', '#ffd700', '#ffffff'];
-
-            (function frame() {
-                confetti({
-                    particleCount: 5,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: colors
-                });
-                confetti({
-                    particleCount: 5,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: colors
-                });
-
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
-            }());
-        }
-    </script>
+    <!-- Link External JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
