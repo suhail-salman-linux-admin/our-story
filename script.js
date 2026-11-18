@@ -1,134 +1,97 @@
-// Floating Background Elements
-function spawnFloating() {
-    const symbols = ['❤️', '💖', '🌸', '✨', '💕', '🌷'];
-    const el = document.createElement('div');
-    el.className = 'bg-element';
-    el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-    el.style.left = Math.random() * 100 + 'vw';
-    el.style.fontSize = (Math.random() * 14 + 16) + 'px';
-    el.style.animationDuration = (Math.random() * 4 + 6) + 's';
-    
-    const container = document.getElementById('bg-container');
-    if (container) {
-        container.appendChild(el);
-    }
-    setTimeout(() => el.remove(), 10000);
-}
-setInterval(spawnFloating, 400);
-
-// Romantic Soft Audio Chime using Web Audio API
-function playChime() {
-    try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const ctx = new AudioContext();
-        const notes = [261.63, 329.63, 392.00, 523.25]; // C, E, G, High C
-        notes.forEach((freq, idx) => {
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.15);
-            gain.gain.setValueAtTime(0.15, ctx.currentTime + idx * 0.15);
-            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.15 + 1.2);
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start(ctx.currentTime + idx * 0.15);
-            osc.stop(ctx.currentTime + idx * 0.15 + 1.3);
-        });
-    } catch (e) {
-        // Audio fallback
-    }
-}
-
-// Screen Switcher
-function goToScreen(num) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
-    const target = document.getElementById('screen-' + num);
-    if (target) {
-        target.classList.remove('hidden');
-    }
-}
-
-// Envelope Interaction
-const envelopeTrigger = document.getElementById('envelope-trigger');
-if (envelopeTrigger) {
-    envelopeTrigger.addEventListener('click', () => {
-        playChime();
-        goToScreen(2);
-    });
-}
-
-// Polaroid Next Button
-const btnToScreen3 = document.getElementById('btn-to-screen-3');
-if (btnToScreen3) {
-    btnToScreen3.addEventListener('click', () => {
-        goToScreen(3);
-    });
-}
-
-// Runaway 'No' Button Logic
+const screens = document.querySelectorAll('.screen');
+const openBtn = document.getElementById('open-btn');
 const noBtn = document.getElementById('no-btn');
-const funnyTexts = [
-    "Are you sure? 🥺",
-    "Ek baar socho! 🙈",
-    "Ye button broken hai 😉",
-    "Nahi allowed nahi hai!",
-    "Sirf YES allowed hai ❤️"
+const toastMsg = document.getElementById('toast-msg');
+const arena = document.getElementById('arena');
+
+const wittyLines = [
+  "The button ran away because it knows you want to say yes 😉",
+  "Try again... it's not gonna bite 😉",
+  "Nice try, Your Highness, wrong button 👑",
+  "Error 404: 'No' option not available for Noureen 💜"
 ];
-let textIndex = 0;
+let dodgeCount = 0;
 
-function dodgeNo() {
-    const padding = 60;
-    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
-    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+function goToScreen(num) {
+  screens.forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(`screen-${num}`);
+  if (target) target.classList.add('active');
 
-    const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
-    const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
-
-    noBtn.style.position = 'fixed';
-    noBtn.style.left = randomX + 'px';
-    noBtn.style.top = randomY + 'px';
-
-    noBtn.innerText = funnyTexts[textIndex % funnyTexts.length];
-    textIndex++;
+  if (num === 4) {
+    startTypewriter();
+  }
 }
 
-if (noBtn) {
-    noBtn.addEventListener('mouseover', dodgeNo);
-    noBtn.addEventListener('click', dodgeNo);
+// Screen 1 -> Screen 2
+openBtn.addEventListener('click', () => {
+  goToScreen(2);
+});
+
+// Runaway "No" button logic
+function moveNoButton() {
+  const maxX = arena.clientWidth - noBtn.offsetWidth - 10;
+  const maxY = arena.clientHeight - noBtn.offsetHeight - 10;
+
+  const randX = Math.max(10, Math.floor(Math.random() * maxX));
+  const randY = Math.max(10, Math.floor(Math.random() * maxY));
+
+  noBtn.style.position = 'absolute';
+  noBtn.style.left = `${randX}px`;
+  noBtn.style.top = `${randY}px`;
+
+  toastMsg.textContent = wittyLines[dodgeCount % wittyLines.length];
+  toastMsg.classList.add('show');
+  dodgeCount++;
 }
 
-// Celebration YES Action
-const yesBtn = document.getElementById('yes-btn');
-if (yesBtn) {
-    yesBtn.addEventListener('click', () => {
-        goToScreen(4);
-        playChime();
+noBtn.addEventListener('mouseover', moveNoButton);
+noBtn.addEventListener('touchstart', (e) => {
+  e.preventDefault();
+  moveNoButton();
+});
+noBtn.addEventListener('click', moveNoButton);
 
-        // 5 Seconds Confetti Blast
-        const end = Date.now() + 5 * 1000;
-        const colors = ['#e91e63', '#ff4081', '#ffd700', '#ffffff'];
-
-        (function frame() {
-            if (typeof confetti === 'function') {
-                confetti({
-                    particleCount: 5,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: colors
-                });
-                confetti({
-                    particleCount: 5,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: colors
-                });
-            }
-
-            if (Date.now() < end) {
-                requestAnimationFrame(frame);
-            }
-        }());
-    });
+// Yes button celebration
+function acceptProposal() {
+  goToScreen(3);
+  launchEmojiBurst(['👑', '💜', '✨', '🌸', '💖'], 26);
 }
+
+// Typewriter letter effect (Screen 4)
+const letterText = `Happy Princess Day.\n\nSome people need a crown to feel royal. You just walk in, smile, and everything around you feels brighter.\n\nYou deserve to be treated like royalty today and every single day. Whatever kingdom you rule, I'm so glad I get to be part of yours.`;
+
+let typingTimer = null;
+function startTypewriter() {
+  const target = document.getElementById('typewriter-body');
+  target.textContent = '';
+  clearInterval(typingTimer);
+  let i = 0;
+
+  typingTimer = setInterval(() => {
+    if (i < letterText.length) {
+      target.textContent += letterText.charAt(i);
+      i++;
+    } else {
+      clearInterval(typingTimer);
+    }
+  }, 28);
+}
+
+// Floating Emoji Burst
+function launchEmojiBurst(emojis, count) {
+  const layer = document.getElementById('confetti-layer');
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement('span');
+    el.className = 'float-emoji';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left = Math.random() * 95 + 'vw';
+    el.style.bottom = '-20px';
+    el.style.animationDuration = (1.8 + Math.random() * 1.4) + 's';
+    layer.appendChild(el);
+    setTimeout(() => el.remove(), 3200);
+  }
+}
+
+document.getElementById('burst-btn').addEventListener('click', () => {
+  launchEmojiBurst(['💜', '👑', '✨', '🌷'], 30);
+});
