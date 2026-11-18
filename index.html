@@ -12,9 +12,19 @@
 <body>
   <div id="confetti-layer"></div>
 
+  <!-- Background Song -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="song.mp3" type="audio/mpeg" />
+  </audio>
+
   <main class="outer-frame">
     <div class="card-container">
       
+      <!-- Floating Music Control Pill -->
+      <button id="music-toggle" class="music-pill" title="Play / Pause Music">
+        🎵 <span id="music-status">Off</span>
+      </button>
+
       <!-- SCREEN 1: INTRO -->
       <section class="screen active" id="screen-1">
         <div class="center-stack">
@@ -23,7 +33,7 @@
             <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=600&q=80" alt="Bouquet" class="seal-bg-img" />
             <div class="wax-seal">🫣</div>
           </div>
-          <p class="tap-hint">tap to open</p>
+          <p class="tap-hint">tap to open (with music 🎶)</p>
           <span class="credit-tag">CRAFTED BY SUHAIL</span>
         </div>
       </section>
@@ -70,9 +80,11 @@
             <div class="floral-tag">For You</div>
           </div>
           <div class="letter-text-col">
-            <h2 class="dear-heading">Dear Noureen,</h2>
-            <p id="typewriter-body" class="letter-body"></p>
-            <p class="letter-sign">— Suhail</p>
+            <div>
+              <h2 class="dear-heading">Dear Noureen,</h2>
+              <p id="typewriter-body" class="letter-body"></p>
+              <p class="letter-sign">— Suhail</p>
+            </div>
             <div class="bottom-controls">
               <button class="pill-nav" onclick="goToScreen(3)">← BACK</button>
               <button class="btn-royal-sm" onclick="goToScreen(5)">NEXT</button>
@@ -102,24 +114,24 @@
         </div>
       </section>
 
-      <!-- SCREEN 6: SCRAPBOOK MEMORIES -->
+      <!-- SCREEN 6: SCRAPBOOK MEMORIES (6 PHOTOS TOTAL) -->
       <section class="screen scrollable-screen" id="screen-6">
         <div class="scrapbook-wrapper">
           <h2 class="scrap-heading">a kingdom of little moments</h2>
           <p class="scrap-sub">PINNED, JUST FOR HER</p>
 
           <div class="scrap-grid">
-            <!-- Polaroid 1 -->
+            <!-- Photo 1 -->
             <div class="polaroid tilt-left">
               <span class="paperclip">📎</span>
-              <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=80" alt="Her" />
+              <img src="photo1.jpg" onerror="this.src='https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=80'" alt="Photo 1" />
               <p class="caption">My Favorite Person</p>
             </div>
 
-            <!-- Polaroid 2 -->
+            <!-- Photo 2 -->
             <div class="polaroid tilt-right">
               <span class="paperclip">📎</span>
-              <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=500&q=80" alt="Bouquet" />
+              <img src="photo2.jpg" onerror="this.src='https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=500&q=80'" alt="Photo 2" />
               <p class="caption">For my Princess</p>
             </div>
 
@@ -134,10 +146,10 @@
               </ul>
             </div>
 
-            <!-- Polaroid 3 -->
+            <!-- Photo 3 -->
             <div class="polaroid tilt-left">
               <span class="paperclip">📎</span>
-              <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=500&q=80" alt="Happiness" />
+              <img src="photo3.jpg" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=500&q=80'" alt="Photo 3" />
               <p class="caption">My Happiness</p>
             </div>
           </div>
@@ -147,10 +159,10 @@
           </div>
 
           <div class="scrap-grid">
-            <!-- Polaroid 4 -->
+            <!-- Photo 4 -->
             <div class="polaroid tilt-right">
               <span class="paperclip">📎</span>
-              <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=500&q=80" alt="Us" />
+              <img src="photo4.jpg" onerror="this.src='https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=500&q=80'" alt="Photo 4" />
               <p class="caption">You + Me</p>
             </div>
 
@@ -163,6 +175,20 @@
                 <li>I smile a lot more</li>
                 <li>Every day feels special</li>
               </ul>
+            </div>
+
+            <!-- Extra Photo 5 -->
+            <div class="polaroid tilt-left">
+              <span class="paperclip">📎</span>
+              <img src="photo5.jpg" onerror="this.src='https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=500&q=80'" alt="Photo 5" />
+              <p class="caption">That Smile 💜</p>
+            </div>
+
+            <!-- Extra Photo 6 -->
+            <div class="polaroid tilt-right">
+              <span class="paperclip">📎</span>
+              <img src="photo6.jpg" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=500&q=80'" alt="Photo 6" />
+              <p class="caption">Forever Together</p>
             </div>
           </div>
 
