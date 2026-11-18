@@ -1,104 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Surprise For Noureen ❤️</title>
-    <!-- Romantic Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Link External CSS -->
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Royal Something — For Noureen 👑</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div id="confetti-layer"></div>
 
-    <div id="bg-container"></div>
-
-    <div class="stage-container">
-        
-        <!-- SCREEN 1: Wax Sealed Envelope -->
-        <div class="screen" id="screen-1">
-            <h2 class="head-title">Khas Noureen Ke Liye ❤️</h2>
-            <p class="sub-text">Ek chota sa paigaam, dil ki gehraiyon se...</p>
-            
-            <div class="envelope-wrap" id="envelope-trigger">
-                <div class="envelope-box">
-                    <div class="wax-seal">💌</div>
-                    <div class="env-title">Confidential</div>
-                    <div class="env-subtitle">Tap seal to unwrap my heart</div>
-                </div>
-            </div>
+  <main class="outer-frame">
+    <div class="card-container">
+      
+      <!-- SCREEN 1: INTRO -->
+      <section class="screen active" id="screen-1">
+        <div class="center-stack">
+          <h1 class="serif-title">A Royal Something</h1>
+          <div class="bouquet-seal-box" id="open-btn" title="Tap to open">
+            <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=600&q=80" alt="Bouquet" class="seal-bg-img" />
+            <div class="wax-seal">🫣</div>
+          </div>
+          <p class="tap-hint">tap to open</p>
+          <span class="credit-tag">CRAFTED BY SUHAIL</span>
         </div>
+      </section>
 
-        <!-- SCREEN 2: Polaroids / Chapters -->
-        <div class="screen hidden" id="screen-2">
-            <h2 class="head-title">Humare Haseen Pal ❤️</h2>
-            <p class="sub-text">Har lamha jo tumhare sath bitaya...</p>
+      <!-- SCREEN 2: PROPOSAL QUESTION -->
+      <section class="screen" id="screen-2">
+        <button class="pill-nav back-top" onclick="goToScreen(1)">← BACK</button>
+        <div class="center-stack">
+          <h2 class="serif-question">Will you be my princess forever?</h2>
+          <p class="her-name">Noureen 👑</p>
+          <p class="from-tag">From: Suhail 💌</p>
 
-            <div class="polaroid-gallery">
-                <div class="polaroid">
-                    <div class="polaroid-img">✨👩‍❤️‍👨</div>
-                    <div class="polaroid-caption">Wo pehli mulakaat...</div>
-                </div>
+          <div class="choice-arena" id="arena">
+            <button class="btn-royal" id="yes-btn" onclick="acceptProposal()">Yes 👸</button>
+            <button class="btn-runaway" id="no-btn">No 😒</button>
+          </div>
 
-                <div class="polaroid">
-                    <div class="polaroid-img">☕🌙</div>
-                    <div class="polaroid-caption">Der raat ki pyari baatein...</div>
-                </div>
+          <div class="witty-toast" id="toast-msg"></div>
+        </div>
+      </section>
 
-                <div class="polaroid">
-                    <div class="polaroid-img">🌸🤝</div>
-                    <div class="polaroid-caption">Har dukh-sukh mein saath...</div>
-                </div>
+      <!-- SCREEN 3: CELEBRATION -->
+      <section class="screen" id="screen-3">
+        <button class="pill-nav back-top" onclick="goToScreen(2)">← BACK</button>
+        <div class="center-stack">
+          <h2 class="serif-celebrate">Yay! Her Majesty said YES!</h2>
+          <div class="big-crown">👑</div>
+          <p class="sub-celebrate">Long live the princess, Noureen! 💜</p>
+
+          <div class="queen-gif-frame">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW54Z3B0OWR5bXp2dW1xOW55N2l4eGx5a2l6NnF2bGd4eGx5a2l6NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l41YrxL7e1EE6zDDG/giphy.gif" alt="Queen Crown" />
+          </div>
+
+          <div class="sarcastic-badge">Even the button knows you're a princess 💀</div>
+          <button class="btn-royal next-inline" onclick="goToScreen(4)">Read Royal Letter →</button>
+        </div>
+      </section>
+
+      <!-- SCREEN 4: TYPEWRITER LETTER -->
+      <section class="screen" id="screen-4">
+        <div class="letter-split">
+          <div class="letter-photo-col">
+            <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=600&q=80" alt="Pink Roses" />
+            <div class="floral-tag">For You</div>
+          </div>
+          <div class="letter-text-col">
+            <h2 class="dear-heading">Dear Noureen,</h2>
+            <p id="typewriter-body" class="letter-body"></p>
+            <p class="letter-sign">— Suhail</p>
+            <div class="bottom-controls">
+              <button class="pill-nav" onclick="goToScreen(3)">← BACK</button>
+              <button class="btn-royal-sm" onclick="goToScreen(5)">NEXT</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN 5: ROYAL CERTIFICATE -->
+      <section class="screen" id="screen-5">
+        <div class="certificate-outer">
+          <div class="certificate-inner">
+            <p class="decree-label">ROYAL DECREE</p>
+            <h2 class="cert-title">Certificate of Princess-hood</h2>
+            <p class="cert-text">This is to certify that</p>
+            <h3 class="cert-her-name">Noureen</h3>
+            <p class="cert-text">said <strong>YES</strong> to Suhail's question:</p>
+            <p class="cert-quote">“Will you be my princess forever?”</p>
+            <p class="cert-text">and is hereby crowned Princess, officially, forever.</p>
+            <p class="cert-date">18 November 2026</p>
+            <div class="cert-crown">👑</div>
+          </div>
+        </div>
+        <div class="bottom-controls cert-nav">
+          <button class="pill-nav" onclick="goToScreen(4)">← BACK</button>
+          <button class="btn-royal-sm" onclick="goToScreen(6)">NEXT</button>
+        </div>
+      </section>
+
+      <!-- SCREEN 6: SCRAPBOOK MEMORIES -->
+      <section class="screen scrollable-screen" id="screen-6">
+        <div class="scrapbook-wrapper">
+          <h2 class="scrap-heading">a kingdom of little moments</h2>
+          <p class="scrap-sub">PINNED, JUST FOR HER</p>
+
+          <div class="scrap-grid">
+            <!-- Polaroid 1 -->
+            <div class="polaroid tilt-left">
+              <span class="paperclip">📎</span>
+              <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=80" alt="Her" />
+              <p class="caption">My Favorite Person</p>
             </div>
 
-            <button class="btn-main" id="btn-to-screen-3">Aage Chaliye ✨</button>
-        </div>
-
-        <!-- SCREEN 3: The Big Ask -->
-        <div class="screen hidden" id="screen-3">
-            <div class="ring-box">💍</div>
-            <div class="propose-name">My Dear Noureen ❤️</div>
-            <h1 class="propose-heading">Will You Marry Me?</h1>
-            <p class="propose-quote">
-                "Zindagi ki har subah tere deedar se shuru ho,<br>
-                Aur har shaam teri baahon me mukammal ho.<br>
-                Kya tum meri poori zindagi ko apna banaogi?"
-            </p>
-
-            <div class="btn-zone">
-                <button class="btn-yes" id="yes-btn">Yes! ❤️</button>
-                <button class="btn-no" id="no-btn">No</button>
-            </div>
-        </div>
-
-        <!-- SCREEN 4: Final Celebration -->
-        <div class="screen hidden" id="screen-4">
-            <h1 class="celebrate-title">She Said YES! 💍💖</h1>
-            <p class="celebrate-subtitle">Hamesha ke liye ek duje ke...</p>
-
-            <div class="cert-card">
-                <div class="cert-badge">✓</div>
-                <div class="cert-title">Love Contract</div>
-                <div class="cert-text">
-                    "This confirms that from this day forward,<br>
-                    <strong>Suhail & Noureen</strong> are bound by laughter, unconditional love, <br>
-                    and forever togetherness!"
-                </div>
-                <p class="cert-footer">Official & Sealed Forever ♾️</p>
+            <!-- Polaroid 2 -->
+            <div class="polaroid tilt-right">
+              <span class="paperclip">📎</span>
+              <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=500&q=80" alt="Bouquet" />
+              <p class="caption">For my Princess</p>
             </div>
 
-            <a href="https://wa.me/?text=YES!%20A%20million%20times%20YES!%20I%20love%20you%20forever!%20💍❤️" target="_blank" class="btn-wa">
-                <span>WhatsApp the Good News! 📲</span>
-            </a>
+            <!-- Note Card 1 -->
+            <div class="sticky-note">
+              <h4>Why You're Royalty</h4>
+              <ul>
+                <li>You carry yourself with grace</li>
+                <li>You lift everyone around you</li>
+                <li>You're strong when it counts</li>
+                <li>You make my world a fairytale</li>
+              </ul>
+            </div>
+
+            <!-- Polaroid 3 -->
+            <div class="polaroid tilt-left">
+              <span class="paperclip">📎</span>
+              <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=500&q=80" alt="Happiness" />
+              <p class="caption">My Happiness</p>
+            </div>
+          </div>
+
+          <div class="quote-banner">
+            Some people are born to wear crowns — you just wear yours with a smile.
+          </div>
+
+          <div class="scrap-grid">
+            <!-- Polaroid 4 -->
+            <div class="polaroid tilt-right">
+              <span class="paperclip">📎</span>
+              <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=500&q=80" alt="Us" />
+              <p class="caption">You + Me</p>
+            </div>
+
+            <!-- Note Card 2 -->
+            <div class="sticky-note">
+              <h4>With You</h4>
+              <ul>
+                <li>I laugh a little louder</li>
+                <li>I worry a little less</li>
+                <li>I smile a lot more</li>
+                <li>Every day feels special</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="footer-line">every day is Princess Day with you</p>
+          <button class="btn-pink-burst" id="burst-btn">Happy Princess Day 💜</button>
+          <div style="margin-top:14px;">
+            <button class="pill-nav" onclick="goToScreen(5)">← Back</button>
+          </div>
         </div>
+      </section>
 
     </div>
+  </main>
 
-    <!-- External Confetti Library -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <!-- Link External JavaScript -->
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
