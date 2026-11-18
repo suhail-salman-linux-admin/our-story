@@ -4,6 +4,35 @@ const noBtn = document.getElementById('no-btn');
 const toastMsg = document.getElementById('toast-msg');
 const arena = document.getElementById('arena');
 
+// Music Elements
+const bgMusic = document.getElementById('bg-music');
+const musicToggle = document.getElementById('music-toggle');
+const musicStatus = document.getElementById('music-status');
+let isPlaying = false;
+
+function playMusic() {
+  bgMusic.play().then(() => {
+    isPlaying = true;
+    musicToggle.classList.add('playing');
+    musicStatus.textContent = 'On';
+  }).catch(() => {
+    // Autoplay blocked until direct tap
+  });
+}
+
+function toggleMusic() {
+  if (isPlaying) {
+    bgMusic.pause();
+    isPlaying = false;
+    musicToggle.classList.remove('playing');
+    musicStatus.textContent = 'Off';
+  } else {
+    playMusic();
+  }
+}
+
+musicToggle.addEventListener('click', toggleMusic);
+
 const wittyLines = [
   "The button ran away because it knows you want to say yes 😉",
   "Try again... it's not gonna bite 😉",
@@ -22,8 +51,9 @@ function goToScreen(num) {
   }
 }
 
-// Screen 1 -> Screen 2
+// Screen 1 -> Screen 2 + Start Music
 openBtn.addEventListener('click', () => {
+  playMusic();
   goToScreen(2);
 });
 
@@ -53,6 +83,7 @@ noBtn.addEventListener('click', moveNoButton);
 
 // Yes button celebration
 function acceptProposal() {
+  if (!isPlaying) playMusic();
   goToScreen(3);
   launchEmojiBurst(['👑', '💜', '✨', '🌸', '💖'], 26);
 }
